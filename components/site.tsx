@@ -1,42 +1,53 @@
 import Link from 'next/link'
-import { ArrowRight, Facebook, Instagram, Mail, MapPin, Menu, Phone, Plane, Search, Send, Star, X } from 'lucide-react'
+import { ArrowRight, Facebook, Instagram, Mail, MapPin, Menu, Phone, Plane, Send, X } from 'lucide-react'
 import { phone, whatsapp, address } from '@/lib/data'
 
 export function Header() {
   return (
-    <header className="header">
-      <div className="nav-wrap">
-        <Link href="/" className="brand" aria-label="Eternel Voyages accueil">
-          <span className="brand-mark"><Plane size={18} strokeWidth={1.8} /></span>
-          <span className="brand-copy"><strong>ETERNEL</strong><small>VOYAGES</small></span>
-        </Link>
-
-        <nav className="desktop-nav" aria-label="Navigation principale">
-          <Link href="/voyages">Voyages</Link>
-          <Link href="/destinations">Destinations</Link>
-          <Link href="/offres">Offres</Link>
-          <Link href="/services">Services</Link>
-          <Link href="/agence">Notre agence</Link>
-        </nav>
-
-        <div className="nav-actions">
-          <Link className="lang" href="/ar">AR</Link>
-          <Link className="nav-cta" href="/demande">Créer mon voyage <ArrowRight size={14} /></Link>
-          <details className="mobile-menu">
-            <summary aria-label="Ouvrir le menu"><Menu size={21} /></summary>
-            <div className="mobile-menu-panel">
-              <Link href="/">Accueil</Link>
-              <Link href="/voyages">Voyages</Link>
-              <Link href="/destinations">Destinations</Link>
-              <Link href="/offres">Offres</Link>
-              <Link href="/services">Services</Link>
-              <Link href="/agence">Notre agence</Link>
-              <Link href="/contact">Contact</Link>
-            </div>
-          </details>
+    <>
+      <div className="topbar">
+        <div className="topbar-inner">
+          <span><MapPin size={12} /> Sétif, Algérie</span>
+          <span className="topbar-note">Votre agence de voyage, votre prochain départ.</span>
+          <span><Phone size={12} /> {phone}</span>
         </div>
       </div>
-    </header>
+      <header className="header">
+        <div className="nav-wrap">
+          <Link href="/" className="brand" aria-label="Eternel Voyages accueil">
+            <span className="brand-mark"><Plane size={18} strokeWidth={1.8} /></span>
+            <span className="brand-copy"><strong>ETERNEL</strong><small>VOYAGES</small></span>
+          </Link>
+
+          <nav className="desktop-nav" aria-label="Navigation principale">
+            <Link href="/voyages">Voyages</Link>
+            <Link href="/destinations">Destinations</Link>
+            <Link href="/offres">Offres</Link>
+            <Link href="/services">Services</Link>
+            <Link href="/agence">L'agence</Link>
+          </nav>
+
+          <div className="nav-actions">
+            <Link className="lang" href="/ar">AR</Link>
+            <Link className="nav-cta" href="/demande">Créer mon voyage <ArrowRight size={14} /></Link>
+            <details className="mobile-menu">
+              <summary aria-label="Ouvrir le menu"><Menu size={22} /></summary>
+              <div className="mobile-menu-panel">
+                <div className="mobile-menu-head"><span>Menu</span><X size={18} /></div>
+                <Link href="/">Accueil</Link>
+                <Link href="/voyages">Voyages</Link>
+                <Link href="/destinations">Destinations</Link>
+                <Link href="/offres">Offres</Link>
+                <Link href="/services">Services</Link>
+                <Link href="/agence">Notre agence</Link>
+                <Link href="/contact">Contact</Link>
+                <Link className="mobile-menu-cta" href="/demande">Créer mon voyage <ArrowRight size={15} /></Link>
+              </div>
+            </details>
+          </div>
+        </div>
+      </header>
+    </>
   )
 }
 
@@ -44,7 +55,7 @@ export function MobileBar() {
   return (
     <div className="mobile-bar">
       <a href={whatsapp()}><Send size={15} /> WhatsApp</a>
-      <Link href="/demande"><Star size={15} /> Demander</Link>
+      <Link href="/demande"><Plane size={15} /> Demander</Link>
       <a href={`tel:${phone}`}><Phone size={15} /> Appeler</a>
     </div>
   )
@@ -61,8 +72,8 @@ export function Footer() {
           </Link>
           <p>Discover. Plan. Travel.<br />Une expérience de voyage pensée autour de vos envies, depuis Sétif.</p>
           <div className="footer-socials">
-            <a href="#" aria-label="Instagram"><Instagram size={16} /></a>
-            <a href="#" aria-label="Facebook"><Facebook size={16} /></a>
+            <a href="https://www.instagram.com/" aria-label="Instagram" rel="noreferrer"><Instagram size={16} /></a>
+            <a href="https://www.facebook.com/" aria-label="Facebook" rel="noreferrer"><Facebook size={16} /></a>
           </div>
         </div>
         <div>
@@ -108,8 +119,4 @@ export function SectionTitle({ eyebrow, title, description }: { eyebrow?: string
       {description && <p>{description}</p>}
     </div>
   )
-}
-
-export function SearchIconButton() {
-  return <button className="icon-button" aria-label="Rechercher"><Search size={17} /></button>
 }
