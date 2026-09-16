@@ -1,0 +1,2 @@
+import Link from 'next/link'
+export default function NotFound(){return <main style={{minHeight:'70vh',display:'grid',placeItems:'center',padding:30,textAlign:'center'}}><div><span style={{letterSpacing:'.2em',fontSize:12}}>404</span><h1 style={{fontFamily:'Georgia',fontSize:54}}>Cette page n’existe pas.</h1><p style={{color:'#66717d'}}>Retournez à l’exploration d’Eternel Voyages.</p><Link href="/" style={{display:'inline-block',padding:'13px 20px',background:'#0c1b2a',color:'#fff'}}>Retour à l’accueil</Link></div></main>}
