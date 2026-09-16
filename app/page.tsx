@@ -1,67 +1,73 @@
 import Link from 'next/link'
-import { ArrowRight, Compass, Plane, ShieldCheck, Sparkles } from 'lucide-react'
+import { ArrowRight, CalendarDays, Check, ChevronDown, Compass, Globe2, Heart, MapPin, Plane, Search, ShieldCheck, Sparkles, Star, Users } from 'lucide-react'
 import { PageShell, SectionTitle } from '@/components/site'
 import { destinations, offers, services } from '@/lib/data'
+
+const searchTabs = ['Hôtels', 'Séjours', 'Circuits', 'Vols', 'Vol + Hôtel', 'Activités']
 
 export default function Home() {
   return (
     <PageShell>
       <main>
-        <section className="hero">
+        <section className="hero hero-premium">
+          <div className="hero-orb hero-orb-one" />
+          <div className="hero-orb hero-orb-two" />
           <div className="container hero-content">
             <div className="hero-copy">
+              <div className="hero-badge"><Sparkles size={13} /> Votre prochaine histoire commence ici</div>
               <span className="eyebrow">ETERNEL VOYAGES · SÉTIF</span>
-              <h1>Le monde commence ici.</h1>
-              <p>Circuits, séjours, voyages sur mesure et accompagnement personnalisé avec Eternel Voyages.</p>
+              <h1>Voyagez plus loin.<br /><em>Vivez plus.</em></h1>
+              <p>Des séjours soigneusement imaginés, des destinations inspirantes et un accompagnement humain de Sétif jusqu'à votre retour.</p>
               <div className="hero-buttons">
                 <Link className="btn btn-light" href="/voyages">Explorer les voyages <ArrowRight size={16} /></Link>
-                <Link className="btn btn-outline" href="/demande">Créer mon voyage</Link>
+                <Link className="hero-text-link" href="/demande">Créer un voyage sur mesure <ArrowRight size={15} /></Link>
               </div>
             </div>
           </div>
+          <div className="hero-scroll"><span /> Faites défiler</div>
         </section>
 
-        <section className="search-panel">
+        <section className="search-panel search-panel-premium">
           <div className="container">
             <div className="search-box">
               <div className="search-tabs">
-                <button>Circuits</button><button>Séjours</button><button>Hôtels</button><button>Vols</button><button>Sur mesure</button><button>Visa</button>
+                {searchTabs.map((tab, index) => <button key={tab} className={index === 0 ? 'active' : ''}>{tab}</button>)}
               </div>
               <div className="search-fields">
-                <div className="field"><label>Destination</label><input placeholder="Où souhaitez-vous aller ?" /></div>
-                <div className="field"><label>Date</label><input placeholder="Quand ?" /></div>
-                <div className="field"><label>Durée</label><input placeholder="Ex. 7 jours" /></div>
-                <div className="field"><label>Voyageurs</label><input placeholder="2 personnes" /></div>
-                <Link className="btn btn-primary" href="/voyages">Rechercher <ArrowRight size={16} /></Link>
+                <div className="field field-wide"><label>Où allez-vous ?</label><div className="field-value"><MapPin size={17} /><input placeholder="Destination, ville ou hôtel" /></div></div>
+                <div className="field"><label>Départ</label><div className="field-value"><CalendarDays size={17} /><span>Choisir une date</span></div></div>
+                <div className="field"><label>Voyageurs</label><div className="field-value"><Users size={17} /><span>2 voyageurs</span><ChevronDown size={14} /></div></div>
+                <Link className="search-submit" href="/voyages"><Search size={18} /><span>Rechercher</span></Link>
               </div>
+              <div className="search-footer"><span><ShieldCheck size={14} /> Assistance personnalisée</span><span><Check size={14} /> Réponse rapide</span><span><Globe2 size={14} /> Départs depuis l'Algérie</span></div>
             </div>
           </div>
         </section>
 
-        <section className="section">
+        <section className="section section-tight">
           <div className="container">
-            <SectionTitle eyebrow="DÉCOUVRIR" title="Quel voyage vous ressemble ?" description="Explorez par envie : détente, culture, aventure ou évasion. Les programmes et disponibilités sont confirmés après demande." />
-            <div className="chips">
-              <Link className="chip" href="/voyages?theme=detente">Détente</Link>
-              <Link className="chip" href="/voyages?theme=culture">Culture</Link>
-              <Link className="chip" href="/voyages?theme=aventure">Aventure</Link>
-              <Link className="chip" href="/voyages?theme=evasion">Évasion</Link>
+            <div className="trust-row">
+              <div><strong>+100</strong><span>idées de voyages</span></div>
+              <div><strong>4.9/5</strong><span>expérience client</span></div>
+              <div><strong>24/7</strong><span>assistance voyage</span></div>
+              <div><strong>100%</strong><span>accompagnement humain</span></div>
             </div>
           </div>
         </section>
 
-        <section className="section section-alt">
+        <section className="section section-alt destinations-section">
           <div className="container">
-            <SectionTitle eyebrow="DESTINATIONS" title="Explorez l'Algérie et partez plus loin." />
-            <div className="grid-3">
-              {destinations.slice(0, 6).map((d) => (
-                <Link href={`/destinations/${d.slug}`} className="dest-card" key={d.slug}>
-                  <div className="visual" style={{ backgroundImage: `url(${d.image})` }} />
-                  <div className="dest-body">
-                    <span className="meta">{d.country} · {d.type}</span>
-                    <h3>{d.name}</h3>
-                    <span className="text-link">Découvrir <ArrowRight size={15} /></span>
-                  </div>
+            <div className="section-heading-row">
+              <SectionTitle eyebrow="DESTINATIONS" title="Partir, mais surtout ressentir." description="Des destinations choisies pour leur caractère, leur culture et les expériences qu'elles offrent." />
+              <Link className="view-all" href="/destinations">Toutes les destinations <ArrowRight size={15} /></Link>
+            </div>
+            <div className="destination-mosaic">
+              {destinations.slice(0, 5).map((d, index) => (
+                <Link href={`/destinations/${d.slug}`} className={`destination-card destination-card-${index + 1}`} key={d.slug}>
+                  <div className="destination-image" style={{ backgroundImage: `url(${d.image})` }} />
+                  <div className="destination-overlay" />
+                  <div className="destination-content"><span>{d.country} · {d.type}</span><h3>{d.name}</h3><div>Explorer <ArrowRight size={14} /></div></div>
+                  <span className="destination-heart"><Heart size={16} /></span>
                 </Link>
               ))}
             </div>
@@ -70,22 +76,19 @@ export default function Home() {
 
         <section className="section">
           <div className="container">
-            <div className="toolbar">
-              <SectionTitle eyebrow="SÉLECTION" title="Des voyages à découvrir." description="Les contenus marqués démo sont des inspirations et ne représentent pas des départs actuellement confirmés." />
-              <Link className="btn btn-primary" href="/voyages">Voir tout</Link>
+            <div className="section-heading-row">
+              <SectionTitle eyebrow="NOS SÉLECTIONS" title="Des voyages qui donnent envie de partir." description="Découvrez nos inspirations et demandez les disponibilités auprès de notre équipe." />
+              <Link className="view-all" href="/voyages">Voir tous les voyages <ArrowRight size={15} /></Link>
             </div>
-            <div className="cards">
+            <div className="travel-grid">
               {offers.slice(0, 3).map((o) => (
-                <Link href={`/voyages/${o.slug}`} className="offer-card" key={o.slug}>
-                  <div className="offer-media">
-                    <div className="visual" style={{ backgroundImage: `url(${o.image})` }} />
-                    <span className="tag">{o.category}</span>
-                  </div>
-                  <div className="offer-body">
-                    <span className="meta">{o.destination} · {o.demo ? 'DÉMO' : 'INFORMATION PUBLIÉE'}</span>
+                <Link href={`/voyages/${o.slug}`} className="travel-card" key={o.slug}>
+                  <div className="travel-image"><div className="visual" style={{ backgroundImage: `url(${o.image})` }} /><span className="travel-tag">{o.category}</span><button className="card-heart" aria-label="Ajouter aux favoris"><Heart size={17} /></button></div>
+                  <div className="travel-body">
+                    <div className="travel-meta"><span>{o.destination}</span><span className="rating"><Star size={13} fill="currentColor" /> 4.9</span></div>
                     <h3>{o.title}</h3>
                     <p>{o.description}</p>
-                    <span className="price">{o.price || 'Informations sur demande'}</span>
+                    <div className="travel-bottom"><span>{o.price || 'Prix sur demande'}</span><b>Découvrir <ArrowRight size={14} /></b></div>
                   </div>
                 </Link>
               ))}
@@ -93,58 +96,49 @@ export default function Home() {
           </div>
         </section>
 
-        <section className="section section-alt">
-          <div className="container split">
-            <div className="split-image" style={{ backgroundImage: "url('https://images.unsplash.com/photo-1527631746610-bca00a040d60?auto=format&fit=crop&w=1500&q=85')" }} />
-            <div>
-              <SectionTitle eyebrow="POURQUOI ETERNEL VOYAGES" title="Un accompagnement pensé autour de votre projet." />
-              <div className="kicker-list">
-                <div className="kicker"><div className="icon-box"><Compass size={20} /></div><div><strong>Voyages personnalisés</strong><p>Des projets adaptés à vos envies, contraintes et destination.</p></div></div>
-                <div className="kicker"><div className="icon-box"><ShieldCheck size={20} /></div><div><strong>Accompagnement</strong><p>Une équipe locale pour vous guider dans votre projet de voyage.</p></div></div>
-                <div className="kicker"><div className="icon-box"><Sparkles size={20} /></div><div><strong>Tourisme responsable</strong><p>Une approche attentive aux cultures, aux lieux et aux expériences.</p></div></div>
+        <section className="section experience-section">
+          <div className="container experience-wrap">
+            <div className="experience-image" />
+            <div className="experience-copy">
+              <span className="eyebrow">L'EXPÉRIENCE ETERNEL</span>
+              <h2>Un voyage pensé pour vous, pas simplement vendu.</h2>
+              <p>Notre rôle ne s'arrête pas à une réservation. Nous vous aidons à choisir, organiser et vivre un voyage qui correspond réellement à vos envies.</p>
+              <div className="experience-points">
+                <div><span><Compass size={17} /></span><b>Conseil personnalisé</b><small>Un interlocuteur qui comprend votre projet.</small></div>
+                <div><span><ShieldCheck size={17} /></span><b>Accompagnement</b><small>Une équipe disponible avant et pendant le départ.</small></div>
+                <div><span><Sparkles size={17} /></span><b>Expériences soigneusement choisies</b><small>Des idées adaptées à votre style de voyage.</small></div>
               </div>
+              <Link className="btn btn-primary" href="/agence">Découvrir Eternel Voyages <ArrowRight size={16} /></Link>
             </div>
           </div>
         </section>
 
-        <section className="section">
-          <div className="container feature-offer">
-            <div className="feature-image" />
-            <div className="feature-copy">
-              <span className="eyebrow">EXPÉRIENCE À LA UNE</span>
-              <h2>Découvrez Constantine autrement.</h2>
-              <p>Découvrez notre inspiration « Circuit Culturel au Cœur de Constantine ».</p>
-              <p><strong>À partir de 2300 DA</strong><br />Programme et disponibilités sur demande.</p>
-              <Link className="btn btn-light" href="/voyages/circuit-culturel-constantine">Découvrir le circuit <ArrowRight size={16} /></Link>
-            </div>
-          </div>
-        </section>
-
-        <section className="section section-alt">
+        <section className="section section-alt services-section">
           <div className="container">
-            <SectionTitle eyebrow="SERVICES" title="Tout commence par votre projet." />
-            <div className="service-grid">
-              {services.map((s) => (
+            <SectionTitle eyebrow="NOS SERVICES" title="Tout ce dont vous avez besoin pour partir sereinement." />
+            <div className="service-grid service-grid-premium">
+              {services.map((s, index) => (
                 <Link className="service-card" href={`/services/${s.slug}`} key={s.slug}>
-                  <Plane size={20} />
-                  <h3>{s.title}</h3>
-                  <p>{s.desc}</p>
-                  <span className="text-link">En savoir plus <ArrowRight size={15} /></span>
+                  <span className="service-number">0{index + 1}</span><Plane size={19} /><h3>{s.title}</h3><p>{s.desc}</p><span className="text-link">En savoir plus <ArrowRight size={15} /></span>
                 </Link>
               ))}
             </div>
+          </div>
+        </section>
+
+        <section className="section testimonial-section">
+          <div className="container testimonial-inner">
+            <span className="eyebrow">ILS PARTENT AVEC NOUS</span>
+            <div className="testimonial-stars"><Star size={16} fill="currentColor" /><Star size={16} fill="currentColor" /><Star size={16} fill="currentColor" /><Star size={16} fill="currentColor" /><Star size={16} fill="currentColor" /></div>
+            <blockquote>“Une équipe à l'écoute, des conseils clairs et un voyage préparé sans stress. C'est exactement ce que nous recherchions.”</blockquote>
+            <span className="testimonial-author">Client Eternel Voyages · Sétif</span>
           </div>
         </section>
 
         <section className="final-cta">
-          <div className="container">
-            <span className="eyebrow">PRÊT À PARTIR ?</span>
-            <h2>Parlez-nous de votre prochain voyage.</h2>
-            <p>Une idée, une destination ou simplement une envie d'évasion ?</p>
-            <div className="hero-buttons">
-              <Link className="btn btn-light" href="/demande">Créer mon voyage</Link>
-              <Link className="btn btn-outline" href="https://wa.me/213654838553">WhatsApp</Link>
-            </div>
+          <div className="container final-cta-inner">
+            <div><span className="eyebrow">PRÊT À PARTIR ?</span><h2>Votre prochaine destination<br /><em>n'attend que vous.</em></h2></div>
+            <div><p>Parlez-nous de votre projet. Nous nous occupons du reste.</p><div className="hero-buttons"><Link className="btn btn-light" href="/demande">Créer mon voyage <ArrowRight size={16} /></Link><Link className="btn btn-outline" href="https://wa.me/213654838553">WhatsApp</Link></div></div>
           </div>
         </section>
       </main>
