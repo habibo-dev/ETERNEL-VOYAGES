@@ -1,0 +1,5 @@
+import Link from 'next/link'
+import { ArrowRight } from 'lucide-react'
+import { destinations } from '@/lib/data'
+import { PageShell, SectionTitle } from '@/components/site'
+export default function Destinations(){return <PageShell><main><section className="page-hero"><div className="container"><span className="eyebrow">DESTINATION EXPLORER</span><h1>Explorez l'Algérie. Partez plus loin.</h1><p>Algérie, Europe, Afrique, Asie et Moyen-Orient : commencez par une idée et construisons la suite ensemble.</p></div></section><section className="section"><div className="container"><SectionTitle eyebrow="DESTINATIONS" title="Un monde à découvrir."/><div className="cards">{destinations.map(d=><Link href={`/destinations/${d.slug}`} className="dest-card" key={d.slug}><div className="visual" style={{backgroundImage:`url(${d.image})`}}/><div className="dest-body"><span className="meta">{d.country} · {d.type}</span><h3>{d.name}</h3><span className="text-link">Explorer <ArrowRight size={15}/></span></div></Link>)}</div></div></section></main></PageShell>}
