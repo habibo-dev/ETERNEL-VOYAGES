@@ -1,7 +1,6 @@
 export type Offer = { slug:string; title:string; destination:string; country:string; category:string; description:string; image:string; price?:string; duration?:string; demo?:boolean }
 export const phone = '+213654838553'
 export const whatsapp = (message='Bonjour Eternel Voyages, je souhaite recevoir des informations sur vos voyages.') => `https://wa.me/213654838553?text=${encodeURIComponent(message)}`
-export const email = 'eternelvoyages@gmail.com'
 export const address = 'Rue Cheraga Laid, La Gare de Train, Sétif — Algérie'
 export const offers: Offer[] = [
  {slug:'circuit-culturel-constantine',title:'Circuit Culturel au Cœur de Constantine',destination:'Constantine',country:'Algérie',category:'Circuits culturels',description:'Une inspiration de voyage dédiée à la découverte culturelle de Constantine.',image:'https://images.unsplash.com/photo-1564507592333-c60657eea523?auto=format&fit=crop&w=1400&q=85',price:'À partir de 2300 DA'},
