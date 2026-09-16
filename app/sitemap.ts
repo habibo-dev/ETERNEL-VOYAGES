@@ -1,0 +1,3 @@
+import type { MetadataRoute } from 'next'
+import { offers, destinations, services } from '@/lib/data'
+export default function sitemap():MetadataRoute.Sitemap{const base='https://eternel-voyages.vercel.app';return [{url:base,priority:1},{url:`${base}/voyages`,priority:.9},{url:`${base}/destinations`,priority:.8},{url:`${base}/offres`,priority:.8},{url:`${base}/services`,priority:.8},{url:`${base}/agence`,priority:.7},{url:`${base}/contact`,priority:.7},{url:`${base}/demande`,priority:.9},...offers.map(o=>({url:`${base}/voyages/${o.slug}`,priority:.8})),...destinations.map(d=>({url:`${base}/destinations/${d.slug}`,priority:.7})),...services.map(s=>({url:`${base}/services/${s.slug}`,priority:.7}))]}
