@@ -1,0 +1,5 @@
+import Link from 'next/link'
+import { ArrowRight } from 'lucide-react'
+import { offers } from '@/lib/data'
+import { PageShell, SectionTitle } from '@/components/site'
+export default function Offres(){return <PageShell><main><section className="page-hero"><div className="container"><span className="eyebrow">OFFRES & INSPIRATIONS</span><h1>Les idées du moment.</h1><p>Une sélection conçue pour inspirer. Prix, dates et disponibilités sont confirmés par l'agence.</p></div></section><section className="section"><div className="container"><SectionTitle eyebrow="SÉLECTION" title="Explorez, puis demandez."/><div className="cards">{offers.map(o=><Link href={`/voyages/${o.slug}`} className="offer-card" key={o.slug}><div className="visual" style={{backgroundImage:`url(${o.image})`}}/><div className="offer-body"><span className="meta">{o.category}</span><h3>{o.title}</h3><p>{o.description}</p><span className="text-link">Voir l'offre <ArrowRight size={15}/></span></div></Link>)}</div></div></section></main></PageShell>}
