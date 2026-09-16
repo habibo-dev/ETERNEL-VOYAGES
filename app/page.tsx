@@ -1,149 +1,38 @@
 import Link from 'next/link'
-import { ArrowRight, CalendarDays, Check, ChevronDown, Compass, Globe2, Heart, MapPin, Plane, Search, ShieldCheck, Sparkles, Star, Users } from 'lucide-react'
+import { ArrowRight, Check, Compass, Globe2, Hotel, MapPin, Plane, ShieldCheck, Sparkles } from 'lucide-react'
 import { PageShell, SectionTitle } from '@/components/site'
+import { TravelSearch } from '@/components/travel-search'
 import { destinations, offers, services } from '@/lib/data'
 
-const searchTabs = ['Hôtels', 'Séjours', 'Circuits', 'Vols', 'Vol + Hôtel', 'Activités']
+const serviceIcons = [Compass, MapPin, Plane, Hotel, ShieldCheck, Sparkles]
 
-export default function Home() {
-  return (
-    <PageShell>
-      <main>
-        <section className="hero hero-premium">
-          <div className="hero-orb hero-orb-one" />
-          <div className="hero-orb hero-orb-two" />
-          <div className="container hero-content">
-            <div className="hero-copy">
-              <div className="hero-badge"><Sparkles size={13} /> Votre prochaine histoire commence ici</div>
-              <span className="eyebrow">ETERNEL VOYAGES · SÉTIF</span>
-              <h1>Voyagez plus loin.<br /><em>Vivez plus.</em></h1>
-              <p>Des séjours soigneusement imaginés, des destinations inspirantes et un accompagnement humain de Sétif jusqu'à votre retour.</p>
-              <div className="hero-buttons">
-                <Link className="btn btn-light" href="/voyages">Explorer les voyages <ArrowRight size={16} /></Link>
-                <Link className="hero-text-link" href="/demande">Créer un voyage sur mesure <ArrowRight size={15} /></Link>
-              </div>
-            </div>
-          </div>
-          <div className="hero-scroll"><span /> Faites défiler</div>
-        </section>
+export default function Home(){
+  return <PageShell><main>
+    <section className="hero hero-product">
+      <div className="hero-media" style={{backgroundImage:`url(${destinations.find(d=>d.slug==='istanbul')?.image})`}}/>
+      <div className="hero-shade"/><div className="hero-grid-lines"/>
+      <div className="container hero-content">
+        <div className="hero-copy reveal"><span className="hero-kicker"><Sparkles size={14}/> ETERNEL VOYAGES · SÉTIF</span><h1>Découvrez votre<br/><em>prochaine destination.</em></h1><p>Inspirez-vous, imaginez votre itinéraire et laissez notre équipe transformer votre idée de voyage en projet concret.</p><div className="hero-actions"><Link className="btn btn-light" href="/destinations">Explorer les destinations <ArrowRight size={16}/></Link><Link className="hero-secondary" href="/demande">Parler à un conseiller <ArrowRight size={15}/></Link></div></div>
+        <div className="hero-floating"><span>À votre rythme</span><b>Des voyages à construire avec vous.</b><small>Tarifs et disponibilités confirmés sur demande.</small></div>
+      </div>
+    </section>
 
-        <section className="search-panel search-panel-premium">
-          <div className="container">
-            <div className="search-box">
-              <div className="search-tabs">
-                {searchTabs.map((tab, index) => <button key={tab} className={index === 0 ? 'active' : ''}>{tab}</button>)}
-              </div>
-              <div className="search-fields">
-                <div className="field field-wide"><label>Où allez-vous ?</label><div className="field-value"><MapPin size={17} /><input placeholder="Destination, ville ou hôtel" /></div></div>
-                <div className="field"><label>Départ</label><div className="field-value"><CalendarDays size={17} /><span>Choisir une date</span></div></div>
-                <div className="field"><label>Voyageurs</label><div className="field-value"><Users size={17} /><span>2 voyageurs</span><ChevronDown size={14} /></div></div>
-                <Link className="search-submit" href="/voyages"><Search size={18} /><span>Rechercher</span></Link>
-              </div>
-              <div className="search-footer"><span><ShieldCheck size={14} /> Assistance personnalisée</span><span><Check size={14} /> Réponse rapide</span><span><Globe2 size={14} /> Départs depuis l'Algérie</span></div>
-            </div>
-          </div>
-        </section>
+    <section className="search-dock"><div className="container"><TravelSearch/></div></section>
 
-        <section className="section section-tight">
-          <div className="container">
-            <div className="trust-row">
-              <div><strong>06</strong><span>destinations présentées</span></div>
-              <div><strong>Sur mesure</strong><span>voyage selon votre projet</span></div>
-              <div><strong>Sétif</strong><span>agence basée en Algérie</span></div>
-              <div><strong>WhatsApp</strong><span>contact direct avec l'équipe</span></div>
-            </div>
-          </div>
-        </section>
+    <section className="section section-intro"><div className="container intro-grid"><div><span className="eyebrow">UNE AUTRE FAÇON DE PRÉPARER</span><h2>Commencez par l'envie.<br/><em>Nous nous occupons du reste.</em></h2></div><p>ETERNEL VOYAGES vous accompagne dans la recherche de séjours, circuits, vols, hôtels et voyages sur mesure. Le site sert d'abord à découvrir et à préparer votre projet — les prix, dates et disponibilités sont confirmés avec l'agence.</p></div></section>
 
-        <section className="section section-alt destinations-section">
-          <div className="container">
-            <div className="section-heading-row">
-              <SectionTitle eyebrow="DESTINATIONS" title="Partir, mais surtout ressentir." description="Des destinations choisies pour leur caractère, leur culture et les expériences qu'elles offrent." />
-              <Link className="view-all" href="/destinations">Toutes les destinations <ArrowRight size={15} /></Link>
-            </div>
-            <div className="destination-mosaic">
-              {destinations.slice(0, 5).map((d, index) => (
-                <Link href={`/destinations/${d.slug}`} className={`destination-card destination-card-${index + 1}`} key={d.slug}>
-                  <div className="destination-image" style={{ backgroundImage: `url(${d.image})` }} />
-                  <div className="destination-overlay" />
-                  <div className="destination-content"><span>{d.country} · {d.type}</span><h3>{d.name}</h3><div>Explorer <ArrowRight size={14} /></div></div>
-                  <span className="destination-heart"><Heart size={16} /></span>
-                </Link>
-              ))}
-            </div>
-          </div>
-        </section>
+    <section className="section section-dark destinations-section"><div className="container"><div className="section-heading-row"><SectionTitle eyebrow="DESTINATIONS" title="Où avez-vous envie d'aller ?" description="Des idées pour commencer. Chaque destination peut devenir un programme personnalisé."/><Link className="view-all light-link" href="/destinations">Voir toutes les destinations <ArrowRight size={15}/></Link></div><div className="destination-mosaic">{destinations.map((d,index)=><Link href={`/destinations/${d.slug}`} className={`destination-card destination-card-${index+1}`} key={d.slug}><div className="destination-image" style={{backgroundImage:`url(${d.image})`}}/><div className="destination-overlay"/><div className="destination-content"><span>{d.country} · {d.type}</span><h3>{d.name}</h3><div>Découvrir <ArrowRight size={14}/></div></div></Link>)}</div></div></section>
 
-        <section className="section">
-          <div className="container">
-            <div className="section-heading-row">
-              <SectionTitle eyebrow="NOS SÉLECTIONS" title="Des voyages qui donnent envie de partir." description="Découvrez nos inspirations et demandez les disponibilités auprès de notre équipe." />
-              <Link className="view-all" href="/voyages">Voir tous les voyages <ArrowRight size={15} /></Link>
-            </div>
-            <div className="travel-grid">
-              {offers.slice(0, 3).map((o) => (
-                <article className="travel-card" key={o.slug}>
-                  <Link href={`/voyages/${o.slug}`} aria-label={`Découvrir ${o.title}`}>
-                    <div className="travel-image"><div className="visual" style={{ backgroundImage: `url(${o.image})` }} /><span className="travel-tag">{o.category}</span><span className="card-heart"><Heart size={17} /></span></div>
-                  </Link>
-                  <div className="travel-body">
-                    <div className="travel-meta"><span>{o.destination}</span><span className="rating"><Star size={13} fill="currentColor" /> Sélection</span></div>
-                    <h3>{o.title}</h3>
-                    <p>{o.description}</p>
-                    <div className="travel-bottom"><span>{o.price || 'Prix sur demande'}</span><Link className="text-link" href={`/voyages/${o.slug}`}>Découvrir <ArrowRight size={14} /></Link></div>
-                  </div>
-                </article>
-              ))}
-            </div>
-          </div>
-        </section>
+    <section className="section"><div className="container"><div className="section-heading-row"><SectionTitle eyebrow="INSPIRATIONS" title="Des voyages à personnaliser" description="Pas de prix inventés : quand un tarif réel n'est pas publié, nous vous proposons une demande de devis."/><Link className="view-all" href="/voyages">Explorer les voyages <ArrowRight size={15}/></Link></div><div className="travel-grid">{offers.slice(0,4).map(o=><article className="travel-card" key={o.slug}><Link href={`/voyages/${o.slug}`} className="travel-image-link"><div className="travel-image"><div className="visual" style={{backgroundImage:`url(${o.image})`}}/><span className="travel-tag">{o.category}</span></div></Link><div className="travel-body"><div className="travel-meta"><span>{o.destination} · {o.country}</span><span>{o.duration||'Sur mesure'}</span></div><h3>{o.title}</h3><p>{o.description}</p><div className="travel-bottom"><span className="travel-price">{o.price || 'Prix sur demande'}</span><Link className="text-link" href={`/voyages/${o.slug}`}>Voir le voyage <ArrowRight size={14}/></Link></div></div></article>)}</div></div></section>
 
-        <section className="section experience-section">
-          <div className="container experience-wrap">
-            <div className="experience-image" />
-            <div className="experience-copy">
-              <span className="eyebrow">L'EXPÉRIENCE ETERNEL</span>
-              <h2>Un voyage pensé pour vous, pas simplement vendu.</h2>
-              <p>Notre rôle ne s'arrête pas à une réservation. Nous vous aidons à choisir, organiser et vivre un voyage qui correspond réellement à vos envies.</p>
-              <div className="experience-points">
-                <div><span><Compass size={17} /></span><b>Conseil personnalisé</b><small>Un interlocuteur qui comprend votre projet.</small></div>
-                <div><span><ShieldCheck size={17} /></span><b>Accompagnement</b><small>Une équipe disponible avant et pendant le départ.</small></div>
-                <div><span><Sparkles size={17} /></span><b>Expériences soigneusement choisies</b><small>Des idées adaptées à votre style de voyage.</small></div>
-              </div>
-              <Link className="btn btn-primary" href="/agence">Découvrir Eternel Voyages <ArrowRight size={16} /></Link>
-            </div>
-          </div>
-        </section>
+    <section className="section experience-section"><div className="container experience-wrap"><div className="experience-image" style={{backgroundImage:`url(${destinations.find(d=>d.slug==='sahara')?.image})`}}/><div className="experience-copy"><span className="eyebrow">L'EXPÉRIENCE ETERNEL</span><h2>Plus qu'une réservation : un projet de voyage.</h2><p>Nous partons de vos envies, puis nous clarifions la destination, les dates, les voyageurs, l'hébergement et les prestations avant de vous présenter une proposition.</p><div className="experience-points"><div><span>01</span><b>Échange</b><small>Vous nous expliquez votre projet.</small></div><div><span>02</span><b>Proposition</b><small>Nous préparons une solution adaptée.</small></div><div><span>03</span><b>Départ</b><small>Vous partez avec un accompagnement clair.</small></div></div><Link className="btn btn-primary" href="/demande">Créer mon voyage <ArrowRight size={16}/></Link></div></div></section>
 
-        <section className="section section-alt services-section">
-          <div className="container">
-            <SectionTitle eyebrow="NOS SERVICES" title="Tout ce dont vous avez besoin pour partir sereinement." />
-            <div className="service-grid service-grid-premium">
-              {services.map((s, index) => (
-                <Link className="service-card" href={`/services/${s.slug}`} key={s.slug}>
-                  <span className="service-number">0{index + 1}</span><Plane size={19} /><h3>{s.title}</h3><p>{s.desc}</p><span className="text-link">En savoir plus <ArrowRight size={15} /></span>
-                </Link>
-              ))}
-            </div>
-          </div>
-        </section>
+    <section className="section section-alt"><div className="container"><SectionTitle eyebrow="NOS SERVICES" title="Tout ce qu'il faut pour préparer votre départ." description="Chaque service explique son rôle et vous mène vers l'action adaptée."/><div className="service-grid service-grid-premium">{services.map((s,index)=>{const Icon=serviceIcons[index]||Sparkles;return <Link className="service-card" href={`/services/${s.slug}`} key={s.slug}><span className="service-number">0{index+1}</span><Icon size={21}/><h3>{s.title}</h3><p>{s.desc}</p><span className="text-link">Découvrir le service <ArrowRight size={15}/></span></Link>})}</div></div></section>
 
-        <section className="section testimonial-section">
-          <div className="container testimonial-inner">
-            <span className="eyebrow">UN ACCOMPAGNEMENT HUMAIN</span>
-            <div className="testimonial-stars"><Sparkles size={18} /></div>
-            <blockquote>“Votre projet de voyage mérite plus qu'une simple réservation.”</blockquote>
-            <span className="testimonial-author">Eternel Voyages · Sétif</span>
-          </div>
-        </section>
+    <section className="section how-section"><div className="container"><div className="section-heading-row"><SectionTitle eyebrow="COMMENT ÇA MARCHE ?" title="Simple à comprendre. Facile à commencer."/><Link className="view-all" href="/demande">Commencer ma demande <ArrowRight size={15}/></Link></div><div className="steps">{[['01','Parlez-nous de votre projet','Destination, dates, voyageurs et envies.'],['02','Nous préparons votre voyage','Nous étudions les éléments nécessaires.'],['03','Vous recevez une proposition','Programme, prestations et tarif confirmé.'],['04','Vous partez sereinement','L’agence reste votre point de contact.']].map(([n,t,d])=><div className="step" key={n}><span>{n}</span><div className="step-line"/><h3>{t}</h3><p>{d}</p></div>)}</div></div></section>
 
-        <section className="final-cta">
-          <div className="container final-cta-inner">
-            <div><span className="eyebrow">PRÊT À PARTIR ?</span><h2>Votre prochaine destination<br /><em>n'attend que vous.</em></h2></div>
-            <div><p>Parlez-nous de votre projet. Nous nous occupons du reste.</p><div className="hero-buttons"><Link className="btn btn-light" href="/demande">Créer mon voyage <ArrowRight size={16} /></Link><Link className="btn btn-outline" href="https://wa.me/213654838553">WhatsApp</Link></div></div>
-          </div>
-        </section>
-      </main>
-    </PageShell>
-  )
+    <section className="section trust-section"><div className="container trust-grid"><div><span className="eyebrow">POURQUOI ETERNEL ?</span><h2>Une expérience pensée pour la confiance.</h2></div><div className="trust-items"><div><Check size={18}/><span><b>Accompagnement personnalisé</b><small>Votre demande est étudiée selon votre projet.</small></span></div><div><Check size={18}/><span><b>Informations transparentes</b><small>Pas de faux tarifs, faux avis ou fausse disponibilité.</small></span></div><div><Check size={18}/><span><b>Contact direct</b><small>WhatsApp, téléphone et demande en ligne.</small></span></div><div><Check size={18}/><span><b>Depuis Sétif</b><small>Une présence locale pour vos projets de voyage.</small></span></div></div></div></section>
+
+    <section className="final-cta"><div className="container final-cta-inner"><div><span className="eyebrow">VOTRE PROCHAINE ÉTAPE</span><h2>Vous avez une idée ?<br/><em>Construisons-la ensemble.</em></h2></div><div><p>Décrivez votre projet en quelques minutes. Le budget reste optionnel.</p><div className="hero-actions"><Link className="btn btn-light" href="/demande">Planifier mon voyage <ArrowRight size={16}/></Link><Link className="btn btn-outline" href="/contact">Contacter l'agence</Link></div></div></div></section>
+  </main></PageShell>
 }
