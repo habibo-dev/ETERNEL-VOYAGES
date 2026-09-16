@@ -47,10 +47,10 @@ export default function Home() {
         <section className="section section-tight">
           <div className="container">
             <div className="trust-row">
-              <div><strong>+100</strong><span>idées de voyages</span></div>
-              <div><strong>4.9/5</strong><span>expérience client</span></div>
-              <div><strong>24/7</strong><span>assistance voyage</span></div>
-              <div><strong>100%</strong><span>accompagnement humain</span></div>
+              <div><strong>06</strong><span>destinations présentées</span></div>
+              <div><strong>Sur mesure</strong><span>voyage selon votre projet</span></div>
+              <div><strong>Sétif</strong><span>agence basée en Algérie</span></div>
+              <div><strong>WhatsApp</strong><span>contact direct avec l'équipe</span></div>
             </div>
           </div>
         </section>
@@ -82,15 +82,17 @@ export default function Home() {
             </div>
             <div className="travel-grid">
               {offers.slice(0, 3).map((o) => (
-                <Link href={`/voyages/${o.slug}`} className="travel-card" key={o.slug}>
-                  <div className="travel-image"><div className="visual" style={{ backgroundImage: `url(${o.image})` }} /><span className="travel-tag">{o.category}</span><button className="card-heart" aria-label="Ajouter aux favoris"><Heart size={17} /></button></div>
+                <article className="travel-card" key={o.slug}>
+                  <Link href={`/voyages/${o.slug}`} aria-label={`Découvrir ${o.title}`}>
+                    <div className="travel-image"><div className="visual" style={{ backgroundImage: `url(${o.image})` }} /><span className="travel-tag">{o.category}</span><span className="card-heart"><Heart size={17} /></span></div>
+                  </Link>
                   <div className="travel-body">
-                    <div className="travel-meta"><span>{o.destination}</span><span className="rating"><Star size={13} fill="currentColor" /> 4.9</span></div>
+                    <div className="travel-meta"><span>{o.destination}</span><span className="rating"><Star size={13} fill="currentColor" /> Sélection</span></div>
                     <h3>{o.title}</h3>
                     <p>{o.description}</p>
-                    <div className="travel-bottom"><span>{o.price || 'Prix sur demande'}</span><b>Découvrir <ArrowRight size={14} /></b></div>
+                    <div className="travel-bottom"><span>{o.price || 'Prix sur demande'}</span><Link className="text-link" href={`/voyages/${o.slug}`}>Découvrir <ArrowRight size={14} /></Link></div>
                   </div>
-                </Link>
+                </article>
               ))}
             </div>
           </div>
@@ -128,10 +130,10 @@ export default function Home() {
 
         <section className="section testimonial-section">
           <div className="container testimonial-inner">
-            <span className="eyebrow">ILS PARTENT AVEC NOUS</span>
-            <div className="testimonial-stars"><Star size={16} fill="currentColor" /><Star size={16} fill="currentColor" /><Star size={16} fill="currentColor" /><Star size={16} fill="currentColor" /><Star size={16} fill="currentColor" /></div>
-            <blockquote>“Une équipe à l'écoute, des conseils clairs et un voyage préparé sans stress. C'est exactement ce que nous recherchions.”</blockquote>
-            <span className="testimonial-author">Client Eternel Voyages · Sétif</span>
+            <span className="eyebrow">UN ACCOMPAGNEMENT HUMAIN</span>
+            <div className="testimonial-stars"><Sparkles size={18} /></div>
+            <blockquote>“Votre projet de voyage mérite plus qu'une simple réservation.”</blockquote>
+            <span className="testimonial-author">Eternel Voyages · Sétif</span>
           </div>
         </section>
 
