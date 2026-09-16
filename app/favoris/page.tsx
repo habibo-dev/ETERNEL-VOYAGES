@@ -1,0 +1,6 @@
+'use client'
+import { useEffect, useState } from 'react'
+import Link from 'next/link'
+import { offers } from '@/lib/data'
+import { PageShell } from '@/components/site'
+export default function Favoris(){const [ids,setIds]=useState<string[]>([]);useEffect(()=>{setIds(JSON.parse(localStorage.getItem('eternel-favorites')||'[]'))},[]);const saved=offers.filter(o=>ids.includes(o.slug));return <PageShell><main><section className="page-hero"><div className="container"><span className="eyebrow">MES VOYAGES</span><h1>Vos voyages enregistrés.</h1><p>Les favoris sont conservés localement sur cet appareil pour la démo.</p></div></section><section className="section"><div className="container">{saved.length===0?<div className="form-card"><h2 style={{fontFamily:'Playfair Display',fontSize:38}}>Aucun voyage enregistré.</h2><p style={{color:'#66717d'}}>Explorez les offres et ajoutez vos idées favorites.</p><Link className="btn btn-primary" href="/voyages">Explorer les voyages</Link></div>:<div className="cards">{saved.map(o=><Link className="offer-card" href={`/voyages/${o.slug}`} key={o.slug}><div className="visual" style={{backgroundImage:`url(${o.image})`}}/><div className="offer-body"><h3>{o.title}</h3><span className="text-link">Ouvrir <span>→</span></span></div></Link>)}</div>}</div></section></main></PageShell>}
